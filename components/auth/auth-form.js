@@ -39,8 +39,6 @@ function AuthForm() {
         redirect: false,
         ...userCredentials,
       });
-
-      console.log(result);
     } else {
       try {
         const result = await createUser(userCredentials);
