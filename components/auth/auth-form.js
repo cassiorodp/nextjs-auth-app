@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import classes from './auth-form.module.css';
+import { signIn } from 'next-auth/client';
 
 async function createUser(userCredential) {
   const { email, password } = userCredential;
@@ -34,7 +35,12 @@ function AuthForm() {
     event.preventDefault();
 
     if (isLogin) {
-      // ...
+      const result = await signIn('credentials', {
+        redirect: false,
+        ...userCredentials,
+      });
+
+      console.log(result);
     } else {
       try {
         const result = await createUser(userCredentials);
